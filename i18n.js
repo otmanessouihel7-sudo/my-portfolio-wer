@@ -33,6 +33,8 @@
     nav_projects: { en: 'Projects',    fr: 'Projets',   ar: 'المشاريع', es: 'Proyectos' },
     nav_demand:   { en: 'Demand',      fr: 'Demande',   ar: 'الطلب',    es: 'Demanda' },
     nav_contact:  { en: 'Contact',     fr: 'Contact',   ar: 'تواصل',    es: 'Contacto' },
+     nav_pricing:     { en: 'Pricing',        fr: 'Prix',   ar: ' الأسعار', es: 'Precios' },
+    nav_process: { en: 'Process',    fr: 'Processus',   ar: 'المسار', es: 'Proceso' },
     nav_cta:      { en: 'Get Started', fr: 'Commencer', ar: 'ابدأ الآن', es: 'Empezar' },
 
     /* ── HERO ── */
