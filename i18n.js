@@ -761,12 +761,16 @@
     tag(navLinks[1], 'nav_projects');
     tag(navLinks[2], 'nav_demand');
     tag(navLinks[3], 'nav_contact');
+    tag(navLinks[4], 'nav_pricing');
+     tag(navLinks[5], 'nav_process');
     tag(q('.nav-right .btn-primary'), 'nav_cta');
     const mobLinks = qa('.mobile-menu li a');
     tag(mobLinks[0], 'nav_home');
     tag(mobLinks[1], 'nav_projects');
     tag(mobLinks[2], 'nav_demand');
     tag(mobLinks[3], 'nav_contact');
+     tag(navLinks[4], 'nav_pricing');
+     tag(navLinks[5], 'nav_process');
     tag(q('.mobile-cta .btn-primary'), 'nav_cta');
 
     /* ── HERO BADGE ── */
