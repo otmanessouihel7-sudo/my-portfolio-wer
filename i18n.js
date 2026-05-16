@@ -171,7 +171,7 @@
 
     /* ── CONTACT ── */
     badge_free:   { en: 'FREE CONSULTATION', fr: 'CONSULTATION GRATUITE', ar: 'استشارة مجانية', es: 'CONSULTA GRATUITA' },
-    contact_h2:   { en: "Not sure what to build?\nLet's figure it out together.", fr: "Pas sûr de quoi construire ?\nTrouvons-le ensemble.", ar: "لست متأكداً ماذا تبني؟\nلنكتشف ذلك معاً.", es: "¿No sabes qué construir?\nDescubrámoslo juntos." },
+    contact_h2:   { en: "Not sure what to build?\nLet's figure it out together.", fr: "Pas sûr de quoi construire ?\nTrouvons-le ensemble.", ar: "لست متأكداً ماذا تبني؟\nلنكتشف ذلك معاً.", es: "No sabes qué construir?\nDescubrámoslo juntos." },
     contact_desc: { en: "Share your idea or problem and I'll give you a clear direction. No pressure, no commitment.", fr: "Partagez votre idée et je vous donnerai une direction claire. Sans pression ni engagement.", ar: "شاركني فكرتك أو مشكلتك وسأعطيك توجيهاً واضحاً. بدون ضغط أو التزام.", es: "Comparte tu idea y te daré una dirección clara. Sin presión ni compromiso." },
     btn_whatsapp: { en: 'Chat on WhatsApp',         fr: 'Discuter sur WhatsApp',  ar: 'تحدث عبر واتساب',      es: 'Chatear en WhatsApp' },
     btn_wa_sub:   { en: 'Fastest way to reach me',  fr: 'Le moyen le plus rapide',ar: 'أسرع طريقة للتواصل',   es: 'La forma más rápida de contactarme' },
