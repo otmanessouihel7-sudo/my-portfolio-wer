@@ -2013,27 +2013,7 @@ document.getElementById('smartContactForm')?.addEventListener('submit', function
     el.classList.add('df-flip');
   }
 
-  /* ── Fetch availability ── */
-  async function fetchAvail() {
-    try {
-      const res = await fetch('http://porfolio-backend.local/wp-json/digitalfler/v1/availability', { cache: 'no-store' });
-      const data = await res.json();
-      const spots  = data.spots_left   ?? data.spots  ?? '08';
-      const booked = data.booked_count ?? data.booked ?? '24';
-      animNum('df-spots',  spots);
-      animNum('df-booked', booked + '+');
-      buildAvatars(Array.isArray(data.avatars) ? Math.max(data.avatars.length, 5) : 5);
-    } catch(_) {
-      animNum('df-spots',  '08');
-      animNum('df-booked', '24+');
-      buildAvatars(5);
-    }
-  }
-
-  fetchAvail();
-  setInterval(fetchAvail, 30000);
-
-  /* ── Scroll reveal ── */
+  
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
       if (e.isIntersecting) {
