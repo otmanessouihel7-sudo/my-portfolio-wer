@@ -434,24 +434,69 @@
      LOAD PROJECTS — WordPress REST API
      Falls back to placeholder state gracefully
   ───────────────────────────────────────── */
-  async function loadProjects() {
-        try {
-            const res = await fetch('http://porfolio-backend.local/wp-json/wp/v2/projects?_embed&per_page=100');
-            if (!res.ok) throw new Error('API error');
-            allProjects = await res.json();
-            applyFilter(true);
-        } catch (err) {
-            console.warn('API not available — showing placeholder state.');
-            if (projectGrid) {
-                projectGrid.innerHTML = `
-                    <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#444;">
-                        <p style="font-size:14px;">Connect to WordPress API to display projects.</p>
-                    </div>
-                `;
-            }
-            if (toggleBtn) toggleBtn.style.display = 'none';
-        }
+  /* ============================================================
+   PATCH for your main site (DigitalFler index.html)
+   ─────────────────────────────────────────────────────────────
+   Replace the existing loadProjects() function inside the
+   projects-section IIFE with the version below.
+
+   Also set these two constants at the top of that script:
+   ============================================================ */
+
+const SUPABASE_URL      = 'https://ieusidssdquahbvhfxeo.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlldXNpZHNzZHF1YWhidmhmeGVvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1NDQwMTAsImV4cCI6MjA5NTEyMDAxMH0.tSkj_oQruRB-IopxOSilCnV6IHzLZIUPh4c6g2KGWEM';
+
+/* ── Replacement loader (uses Supabase instead of WordPress) ── */
+async function loadProjects() {
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/projects?select=*&order=created_at.desc`,
+      {
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+      }
+    );
+    if (!res.ok) throw new Error('API error ' + res.status);
+    const rows = await res.json();
+
+    // Normalize to the shape the rest of your render code expects
+    allProjects = rows.map(r => ({
+      id: r.id,
+      title: { rendered: r.title || 'Untitled' },
+      acf:   { link: r.link || '#' },
+      // views shown on cards
+      views: r.views || 0,
+      _embedded: {
+        'wp:featuredmedia': r.image_url ? [{ source_url: r.image_url }] : [],
+        'wp:term': [[{ slug: r.category }]],
+      },
+      // expose raw type so filter tabs (websites / stores) work directly
+      _type: r.type,
+    }));
+
+    applyFilter(true);
+  } catch (err) {
+    console.warn('Projects API unavailable:', err);
+    if (grid) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:60px 20px; color:#444;">
+          <p style="font-size:14px;">No projects yet. Add some from the dashboard.</p>
+        </div>`;
     }
+    if (toggleBtn) toggleBtn.style.display = 'none';
+  }
+}
+
+/* ── (Optional) make the main tabs use the stored type directly ──
+   In applyFilter(), replace the matchMain block with:
+
+   const matchMain =
+     main === 'all' ||
+     (main === 'websites' && p._type === 'websites') ||
+     (main === 'stores'   && p._type === 'stores');
+*/
 
   /* ─────────────────────────────────────────
      FILTER LOGIC
@@ -2013,3 +2058,9 @@ document.getElementById('smartContactForm')?.addEventListener('submit', function
 
 </body>
 </html>
+
+
+
+
+
+
